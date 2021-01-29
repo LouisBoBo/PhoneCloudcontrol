@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@color/color_ff000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_marginBottom="@dimen/dp_70"
+        tools:ignore="NotSibling">
+    </com.baidu.mapapi.map.MapView>
+
+    <com.exc.applibrary.main.customview.BottomDrawerLayout
+        android:id="@+id/bottom_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/alph"
+        >
+
+        <FrameLayout
+            android:id="@+id/layout_price_detail"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:id="@+id/layout_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/transparent"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </com.exc.applibrary.main.customview.BottomDrawerLayout>
+
+</RelativeLayout>

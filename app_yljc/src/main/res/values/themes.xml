@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Wuhapp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+
+        <!-- Primary brand color. -->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/common_blue</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

@@ -1,0 +1,6 @@
+include ':ZBLibrary'
+include ':QRCodeLibrary'
+include ':app_yljc'
+include ':AppLibrary'
+include ':FuckTabLayouLlib'
+rootProject.name = "PhoneCloudcontrol"

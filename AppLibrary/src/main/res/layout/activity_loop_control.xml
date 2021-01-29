@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.exc.applibrary.main.customview.YFHeaderView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:title_text="回路控制"
+        app:show_views="center_text|left_img|right_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <View
+        android:id="@+id/select_headview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/background_build_unselector"
+        app:layout_constraintTop_toBottomOf="@+id/head_view"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/btn_online"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="在线"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="@dimen/dp_1"
+        android:textColor="@color/btn_gray_pressed"
+        android:background="@drawable/background_textview_selector"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toStartOf="@id/select_headview"
+        app:layout_constraintEnd_toStartOf="@id/btn_offline"
+        app:layout_constraintBottom_toBottomOf="@id/select_headview"
+        />
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/pop_item_bg_pressed"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_online"/>
+
+    <TextView
+        android:id="@+id/btn_offline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="离线"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="@dimen/dp_1"
+        android:textColor="@color/btn_gray_pressed"
+        android:background="@drawable/background_textview_selector"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_online"
+        app:layout_constraintEnd_toStartOf="@id/btn_open"
+        app:layout_constraintBottom_toBottomOf="@id/select_headview"
+        />
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/pop_item_bg_pressed"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_offline"/>
+
+    <TextView
+        android:id="@+id/btn_open"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="打开"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="@dimen/dp_1"
+        android:textColor="@color/btn_gray_pressed"
+        android:background="@drawable/background_textview_selector"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_offline"
+        app:layout_constraintEnd_toStartOf="@id/btn_close"
+        app:layout_constraintBottom_toBottomOf="@id/select_headview"
+        />
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/pop_item_bg_pressed"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_open"/>
+
+    <TextView
+        android:id="@+id/btn_close"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="关闭"
+        android:gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="@dimen/dp_1"
+        android:textColor="@color/btn_gray_pressed"
+        android:background="@drawable/background_textview_selector"
+        app:layout_constraintTop_toTopOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/btn_open"
+        app:layout_constraintEnd_toEndOf="@id/select_headview"
+        app:layout_constraintBottom_toBottomOf="@id/select_headview"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/leftRecycleview"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_5"
+        android:background="@color/pop_item_bg_pressed"
+        app:layout_constraintTop_toBottomOf="@id/select_headview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:text="全部回路"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/select_headview"
+        app:layout_constraintStart_toEndOf="@id/leftRecycleview"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srlEnableRefresh="false"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:layout_constraintStart_toEndOf="@id/leftRecycleview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rightRecycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:background="@android:color/white"
+             />
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header_root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/color_ffffffff">
+
+        <ImageView
+            android:id="@+id/mHeaderLeftImg"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:id="@+id/header_center_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:lines="1"
+            android:maxLines="11"
+            android:text="快速切换节目"
+            android:textColor="#000"
+            android:textSize="@dimen/dp_17"
+            android:textStyle="" />
+
+        <ImageView
+            android:layout_marginRight="@dimen/dp_17"
+            android:padding="@dimen/dp_3"
+            android:layout_centerVertical="true"
+            android:id="@+id/header_right_img"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_search_blue"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line_color" />
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

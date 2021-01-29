@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@color/color_ff000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_marginBottom="@dimen/dp_15"
+        tools:ignore="NotSibling">
+    </com.baidu.mapapi.map.MapView>
+
+    <com.exc.applibrary.main.customview.BottomDrawerLayout
+        android:id="@+id/bottom_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/alph"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_price_detail"
+            android:layout_width="match_parent"
+            android:layout_height="335dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:id="@+id/layout_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_15"
+            android:background="@color/alph"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </com.exc.applibrary.main.customview.BottomDrawerLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_tips"
+        app:constraint_referenced_ids="search_text,base_search"
+        />
+
+    <View
+        android:id="@+id/search_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignBottom="@id/bmapView"
+        android:background="@color/color_ffffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-20dp"/>
+
+    <TextView
+        android:id="@+id/base_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:background="@drawable/common_bg_light"
+        android:layout_alignBottom="@id/search_text"
+        app:layout_constraintStart_toStartOf="@id/search_text"
+        app:layout_constraintEnd_toEndOf="@id/search_text"
+        android:layout_marginBottom="13.5dp"
+        android:text=" 搜索分区、站点、建筑"
+        android:drawableLeft="@mipmap/search_big"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_5"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        />
+
+    <TextView
+        android:id="@+id/bottom_direction"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_15"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@id/bmapView"
+        android:background="@color/bga_adapter_item_pressed"/>
+
+    <ImageView
+        android:id="@+id/bottom_img_Direction"
+        android:visibility="invisible"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_15"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@id/bmapView"
+        android:src="@mipmap/pilltiphover" />
+</RelativeLayout>
