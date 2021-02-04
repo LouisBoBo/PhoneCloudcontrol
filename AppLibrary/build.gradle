@@ -18,6 +18,9 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    viewBinding.enabled = true
+
+
 //    packagingOptions {
 //        exclude 'ResPackIndoorMap.rs'
 //        exclude '**.**'
@@ -70,7 +73,9 @@ android {
 }
 
 dependencies {
+    implementation 'com.pengli:pswitch:0.0.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.github.donkingliang:ConsecutiveScroller:2.6.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation project(path: ':ZBLibrary')
@@ -83,7 +88,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     implementation 'com.google.code.gson:gson:2.8.6'
-
+    implementation 'com.shuyu:GSYVideoPlayer:8.0.0'
     //添加Kotlin标准库依赖
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //添加Anko库依赖，anko-common是我们需要Anko库的一小部分，以至于我们不会把没用到的部分加进来。

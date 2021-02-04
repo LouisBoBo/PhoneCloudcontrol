@@ -63,6 +63,18 @@ public class HttpRequest {
     public static final String SERVICES_ADDRESS = "http://192.168.112.78";//吴自力
     public static final String SERVICES_FILE_PATH = "http://192.168.112.78" + SERVICES_PORT_ORDER + "/";
 
+
+    /**
+     * 联俊测试
+     */
+//    public static final String SERVICES_ADDRESS = "http://192.168.111.155";
+//    public static final String SERVICES_FILE_PATH = "http://192.168.111.155" + SERVICES_PORT_ORDER + "/";
+
+
+
+
+
+
 //    public static final String SERVICES_ADDRESS = "http://192.168.112.61";//小戴
 //    public static final String SERVICES_FILE_PATH = "http://192.168.112.61:8089/";
 
@@ -199,6 +211,16 @@ public class HttpRequest {
      * 根据分区、站点、节点、建筑名查询回路数据接口
      */
     public static final String API_ELECTRICITY_NODE = SERVICES_PORT + "/api/electricity/node";
+
+    /**
+     * 修改密码
+     */
+    public static final String API_USER_UPDATEPASSWORD = SERVICES_PORT + "/api/user/updatepassword";
+
+    /**
+     * 修改个人信息
+     */
+    public static final String API_USER_UPDATE = SERVICES_PORT + "/api/user/update";
 
     public static final String PAGE_NUM = "pageNum";
 
@@ -683,6 +705,41 @@ public class HttpRequest {
         request.put("pageNum", 1);
         request.put("pageSize" , 1000);
         HttpManager.getInstance().get(request, SERVICES_ADDRESS + API_ELECTRICITY_NODE, requestCode, listener);
+    }
+
+    /**
+     * 修改密码
+     */
+    public static void pwdChangeHttp(String usedPasswrod, String password, int requestCode, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("usedPasswrod", MD5Util.computeMD5(usedPasswrod));
+        request.put("password",MD5Util.computeMD5(password));
+        HttpManager.getInstance().post(request, SERVICES_ADDRESS + API_USER_UPDATEPASSWORD, requestCode, listener);
+    }
+
+    /**
+     *修改个人信息
+     */
+    public static void updateUserHttp(String id, String email, String gender, String name, String phone, int requestCode, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("id", id);
+        if(email != null && email.length() > 0){
+            request.put("email",email);
+        }
+
+        if(gender != null && gender.length() > 0){
+            request.put("gender",gender);
+        }
+
+        if(name != null && name.length() > 0){
+            request.put("name",name);
+        }
+
+        if(phone !=null && phone.length() > 0){
+            request.put("phone",phone);
+        }
+
+        HttpManager.getInstance().post(request, SERVICES_ADDRESS + API_USER_UPDATE, requestCode, listener);
     }
     //account>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

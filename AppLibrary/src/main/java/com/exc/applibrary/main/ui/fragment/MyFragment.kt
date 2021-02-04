@@ -11,6 +11,7 @@ import com.exc.applibrary.R
 import com.exc.applibrary.main.model.LoginInfo
 import com.exc.applibrary.main.ui.activity.AboutUsActivity
 import com.exc.applibrary.main.ui.activity.MyInfoActivity
+import com.exc.applibrary.main.ui.activity.PwdChangeActivity
 import com.exc.applibrary.main.utils.CommonUtils
 import com.exc.applibrary.main.utils.Constant
 import com.exc.applibrary.main.utils.PreferencesUtil
@@ -39,6 +40,10 @@ class MyFragment : BaseFragment() {
         findView<View>(R.id.loginout) { CommonUtils.exitLogin(401, mActivity) }
         findView<View>(R.id.cl_user_info) {
             toActivity(Intent(activity, MyInfoActivity::class.java))
+        }
+
+        findView<View>(R.id.change_pwd){
+            toActivity(Intent(activity, PwdChangeActivity::class.java))
         }
 
         findView<View>(R.id.about) {

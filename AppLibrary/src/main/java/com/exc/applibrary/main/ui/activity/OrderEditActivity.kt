@@ -339,7 +339,7 @@ open class OrderEditActivity : TakePhotoActivity(), View.OnClickListener, OnHttp
 
 
             if (model?.isXC!!) {
-                Glide.with(mContext).load(File(model?.filename)).into(imageView)
+                Glide.with(mContext).load(File(model?.filename)).into(imageView!!)
                 imageView?.visibility = View.VISIBLE
                 iv_close?.visibility = View.VISIBLE
                 ll_add?.visibility = View.GONE

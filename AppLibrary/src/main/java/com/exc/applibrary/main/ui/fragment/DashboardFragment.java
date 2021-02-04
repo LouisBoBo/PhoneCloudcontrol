@@ -8,15 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.exc.applibrary.R;
+import com.exc.applibrary.main.customview.YFHeaderView;
+import com.exc.applibrary.main.message.MyMessageListActivity;
 import com.exc.applibrary.main.ui.activity.LoopControlActivity;
 import com.exc.applibrary.main.ui.activity.MyWorkOrderListActivity;
 import com.exc.applibrary.main.ui.activity.SceneSwitchActivity;
-import com.exc.applibrary.main.ui.activity.SwitchShowActivity;
+import com.exc.applibrary.main.show.SwitchShowActivity;
 
 import zuo.biao.library.base.BaseFragment;
 
 public class DashboardFragment extends BaseFragment implements View.OnClickListener {
     private Activity mActivity;
+    private YFHeaderView header_view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +34,15 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void initView() {
+        header_view = findView(R.id.header_view);
+        header_view.setImg_right(R.drawable.icon_message);
+        header_view.img_right.setOnClickListener(v -> {
+            toActivity(new Intent(mActivity, MyMessageListActivity.class));
+
+        });
+        header_view.img_right.setVisibility(View.VISIBLE);
+
+
         findView(R.id.bordy1, this);
         findView(R.id.bordy2, this);
         findView(R.id.bordy3, this);

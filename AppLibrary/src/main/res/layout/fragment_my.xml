@@ -92,6 +92,48 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_ffffffff">
+
+            <ImageView
+                android:id="@+id/change_image"
+                android:layout_width="35dp"
+                android:layout_height="@dimen/dp_38"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:src="@mipmap/editpass"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/change_bottom_image"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="20dp"
+                android:layout_marginRight="@dimen/dp_20"
+                android:background="@mipmap/right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:text="修改密码"
+                android:textColor="#333333"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/change_bottom_image"
+                app:layout_constraintStart_toEndOf="@id/change_image"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="50dp"

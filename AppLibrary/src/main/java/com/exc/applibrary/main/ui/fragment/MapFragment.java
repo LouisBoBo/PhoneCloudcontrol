@@ -1180,6 +1180,11 @@ public class MapFragment extends Fragment implements OnHttpResponseListener, Ale
     @Override
     public void onHttpResponse(int requestCode, String resultJson, Exception e) {
 
+        if (null == resultJson) {
+            showShortToast(getContext(),"请求异常，请检查网络");
+            return;
+        }
+
         if(requestCode == PARTITION_FINDLIST_CODE){
             if (null == resultJson) {
                 showShortToast(getContext(),"请求异常，请检查网络");

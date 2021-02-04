@@ -16,8 +16,7 @@
 
 
     <application>
-        <activity android:name=".main.MainActivity"
-            />
+        <activity android:name=".main.MainActivity" />
         <activity android:name=".main.ui.activity.MyInfoActivity"></activity>
         <activity
             android:name=".main.ui.activity.PwdChangeActivity"
@@ -64,14 +63,21 @@
 
         <activity
             android:name=".main.ui.activity.LoopControlActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".main.ui.activity.SceneExeRightActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".main.ui.activity.SwitchShowActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".main.message.MessageDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.message.MyMessageListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.show.SwitchShowActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait" />
 
 
     </application>

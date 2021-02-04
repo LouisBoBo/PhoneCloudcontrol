@@ -1,7 +1,10 @@
 package com.exc.applibrary.main.customview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+
+import com.google.android.material.internal.ViewUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,18 +14,25 @@ import java.util.logging.LogRecord;
 public class CustomDialog {
     private MyLoadingPopupView loadingPopup;
     private Context context;
+
     public CustomDialog(Context context, String string) {
         this.context = context;
         loadingPopup = new MyXPopup.Builder(context)
                 .hasShadowBg(false)
+                .maxHeight(50)
+                .maxWidth(50)
                 .dismissOnBackPressed(true)
                 .asLoading(string);
 
     }
+
+    @SuppressLint("RestrictedApi")
     public CustomDialog(Context context) {
         this.context = context;
         loadingPopup = new MyXPopup.Builder(context)
                 .hasShadowBg(false)
+                .maxWidth((int) ViewUtils.dpToPx(context,88))
+                .maxHeight((int) ViewUtils.dpToPx(context,88))
                 .dismissOnBackPressed(true)
                 .asLoading("");
 
@@ -36,7 +46,7 @@ public class CustomDialog {
             final Timer t = new Timer();
             t.schedule(new TimerTask() {
                 public void run() {
-                    ((Activity)context).runOnUiThread(() -> loadingPopup.dismiss());
+                    ((Activity) context).runOnUiThread(() -> loadingPopup.dismiss());
                 }
             }, 8000);
         }
@@ -44,7 +54,7 @@ public class CustomDialog {
 
     public void dismiss() {
         if (null != loadingPopup) {
-            ((Activity)context).runOnUiThread(() -> loadingPopup.dismiss());
+            ((Activity) context).runOnUiThread(() -> loadingPopup.dismiss());
         }
     }
 

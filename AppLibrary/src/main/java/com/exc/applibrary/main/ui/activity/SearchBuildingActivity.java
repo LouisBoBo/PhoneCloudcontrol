@@ -271,6 +271,9 @@ public class SearchBuildingActivity extends BaseActivity implements OnHttpRespon
             }
         });
 
+
+
+
         //确定按钮
         tv_confirm.setOnClickListener(new View.OnClickListener() {
             @Override

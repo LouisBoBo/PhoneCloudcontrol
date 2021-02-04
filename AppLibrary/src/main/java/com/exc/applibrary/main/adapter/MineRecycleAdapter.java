@@ -32,12 +32,12 @@ public class MineRecycleAdapter extends RecyclerView.Adapter<MineRecycleAdapter.
 
         dataList = new ArrayList<String>();
         dataList.add("个人信息");
-//        dataList.add("修改密码");
+        dataList.add("修改密码");
         dataList.add("关于我们");
 
         imageList = new ArrayList<Integer>();
         imageList.add(R.mipmap.userinfo);
-//        imageList.add(R.mipmap.editpass);
+        imageList.add(R.mipmap.editpass);
         imageList.add(R.mipmap.about);
 
         notifyDataSetChanged();

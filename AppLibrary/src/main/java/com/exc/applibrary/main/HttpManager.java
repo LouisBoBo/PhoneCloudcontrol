@@ -168,7 +168,13 @@ public class HttpManager {
             @Override
             protected void onPostExecute(Exception exception) {
                 super.onPostExecute(exception);
-                listener.onHttpResponse(requestCode, result, exception);
+                try {
+                    JsonUtils.parseObject(result, BaseBean.class);
+                    listener.onHttpResponse(requestCode, result, exception);
+                }catch (Exception e){
+                    listener.onHttpResponse(requestCode, null, exception);
+
+                }
             }
 
         }.execute();
@@ -390,7 +396,13 @@ public class HttpManager {
             @Override
             protected void onPostExecute(Exception exception) {
                 super.onPostExecute(exception);
-                listener.onHttpResponse(requestCode, result, exception);
+                try {
+                    JsonUtils.parseObject(result, BaseBean.class);
+                    listener.onHttpResponse(requestCode, result, exception);
+                }catch (Exception e){
+                    listener.onHttpResponse(requestCode, null, exception);
+                }
+
             }
 
         }.execute();
@@ -532,7 +544,18 @@ public class HttpManager {
                     ResponseBody body = response.body();
                     if (null != body) {
                         String result = body.string();
-                        listener.onHttpResponse(requestCode, result, null);
+
+                        try {
+                            JsonUtils.parseObject(result, BaseBean.class);
+                            listener.onHttpResponse(requestCode, result, null);
+
+
+                        }catch (Exception e){
+                            listener.onHttpResponse(requestCode, null, null);
+
+                        }
+
+
 
                         Log.d(TAG, "\n request put  result = \n" + result + "\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
                     } else {

@@ -20,7 +20,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('C:\\CloudControl1.jks')
+            storeFile file('CloudControl1.jks')
             storePassword '20201216'
             keyPassword '20201216'
             keyAlias 'cc1'

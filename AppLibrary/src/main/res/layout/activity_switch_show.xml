@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F7F7"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/header_root_layout"
+        android:id="@+id/headerRootLayout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/color_ffffffff">
@@ -36,13 +38,13 @@
             android:textStyle="" />
 
         <ImageView
-            android:layout_marginRight="@dimen/dp_17"
-            android:padding="@dimen/dp_3"
-            android:layout_centerVertical="true"
             android:id="@+id/header_right_img"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_17"
+            android:padding="@dimen/dp_3"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_search_blue"
             android:visibility="visible" />
@@ -56,7 +58,100 @@
     </RelativeLayout>
 
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlDisableContentWhenRefresh="true"
+        app:srlEnableRefresh="false">
 
+
+        <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/mTvSiteName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:text="站点名称"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_17" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:text="正在播放节目，非实时"
+                    android:textColor="@color/common_blue"
+                    android:textSize="@dimen/sp_13" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/mIvNoVideoPlaying"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_180"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:src="@drawable/no_video_playing" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/mTvNoVideoPlaying"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="当前站点无正在播放视频"
+                android:textColor="@color/color_555555"
+                android:textSize="16sp" />
+
+
+            <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+                android:id="@+id/headerVideoPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                android:layout_marginTop="@dimen/dp_20"
+                app:layout_constraintTop_toBottomOf="@id/mTvNoVideoPlaying" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/blue"
+                app:layout_isSticky="true" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerViewShowList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_switch_show" />
+
+
+        </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

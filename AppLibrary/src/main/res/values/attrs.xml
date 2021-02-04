@@ -21,4 +21,8 @@
             <flag name="center_img" value="0x20" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <attr name="switch_state" format="boolean"/>
+    </declare-styleable>
 </resources>
