@@ -64,6 +64,15 @@ public class HttpRequest {
     public static final String SERVICES_FILE_PATH = "http://192.168.112.78" + SERVICES_PORT_ORDER + "/";
 
 
+//    public static final String SERVICES_PORT = "http://iot.whapp.test.exc-led.cn";
+//    public static final String SERVICES_PORT1 = "http://iotwar.whapp.test.exc-led.cn";
+//    public static final String SERVICES_PORT2 = ":8088";
+//    public static final String SERVICES_PORT3 = "http://iotwar.whapp.test.exc-led.cn";
+//    public static final String SERVICES_PORT_ORDER = "http://manage.whapp.test.exc-led.cn";
+//    public static final String SERVICES_ADDRESS = "";
+//    public static final String SERVICES_FILE_PATH = "" + SERVICES_PORT_ORDER + "/";
+
+
     /**
      * 联俊测试
      */
@@ -71,8 +80,11 @@ public class HttpRequest {
 //    public static final String SERVICES_FILE_PATH = "http://192.168.111.155" + SERVICES_PORT_ORDER + "/";
 
 
-
-
+    /**
+     * 联俊测试
+     */
+//    public static final String SERVICES_ADDRESS = "http://192.168.111.155";
+//    public static final String SERVICES_FILE_PATH = "http://192.168.111.155" + SERVICES_PORT_ORDER + "/";
 
 
 //    public static final String SERVICES_ADDRESS = "http://192.168.112.61";//小戴
@@ -240,41 +252,41 @@ public class HttpRequest {
     /**
      * 节点选择场景列表
      */
-    public static final String GET_SCENE_LEFT_LIST = ":9701/api/electricity/node";
+    public static final String GET_SCENE_LEFT_LIST = SERVICES_PORT + "/api/electricity/node";
 
     /**
      * 根据节点id选择场景回路—>查询场景回路数据
      */
-    public static final String QUERY_SCENE_BY_ID = ":9701/api/can/scene/node/";
+    public static final String QUERY_SCENE_BY_ID = SERVICES_PORT + "/api/can/scene/node/";
 
     /**
      * 立即下发—> 批量控制回路接口
      */
-    public static final String SCENE_LI_JI_XIA_FA = ":9701/api/can/channel/control";
+    public static final String SCENE_LI_JI_XIA_FA =SERVICES_PORT + "/api/can/channel/control";
 
 
     /**
      * 场景定时下发
      */
-    public static final String SCENE_PRE_TIME_XIA_FA = ":9701/api/can/timing";
+    public static final String SCENE_PRE_TIME_XIA_FA =SERVICES_PORT + "/api/can/timing";
 
     /**
      * 场景选择节点列表
      */
-    public static final String SCENE_CHOOSE_JIEDIAN = ":9701/api/can/scene";
+    public static final String SCENE_CHOOSE_JIEDIAN =SERVICES_PORT + "/api/can/scene";
     /**
      * 根据场景名称查询强电场景控制结果数据
      */
-    public static final String SCENE_CHOOSE_CONTROLLER_BY_NAME = ":9701/api/can/scene/name";
+    public static final String SCENE_CHOOSE_CONTROLLER_BY_NAME = SERVICES_PORT +"/api/can/scene/name";
     /**
      * 批量控制场景回路（立即下发）
      */
-    public static final String SCENE_XIAFA_PILIANG = ":9701/api/can/channel/control/scene";
+    public static final String SCENE_XIAFA_PILIANG =SERVICES_PORT + "/api/can/channel/control/scene";
 
     /**
      * 批量控制场景回路（定时下发）
      */
-    public static final String SCENE_XIAFA_PILIANG_TIMING = ":9701/api/can/timing/patch";
+    public static final String SCENE_XIAFA_PILIANG_TIMING = SERVICES_PORT +"/api/can/timing/patch";
 
     /**
      * 待初审（市级）—>获取用户列表 接口
@@ -322,7 +334,7 @@ public class HttpRequest {
     /**
      * 获取用户信息
      */
-    public static final String GET_USR_DATA = ":9701/api/user/get";
+    public static final String GET_USR_DATA =SERVICES_PORT + "/api/user/get";
 
     /**
      * 处理完成进入待审核
@@ -608,13 +620,13 @@ public class HttpRequest {
         Map<String, Object> request = new HashMap<>();
         request.put("pageSize", pageSize);
         request.put("pageNum", pageNum);
-        request.put("partitionId", partitionId != 0?partitionId:"");
-        request.put("siteId", siteId != 0?siteId:"");
+        request.put("partitionId", partitionId != 0 ? partitionId : "");
+        request.put("siteId", siteId != 0 ? siteId : "");
         request.put("buildingName", buildingName);
-        request.put("nid", nid != 0?nid:"");
-        request.put("offline", offline != 999?offline:"");
-        request.put("status", status != 999?status:"");
-        request.put("channelTypeId", channelTypeId != 0?channelTypeId:"");
+        request.put("nid", nid != 0 ? nid : "");
+        request.put("offline", offline != 999 ? offline : "");
+        request.put("status", status != 999 ? status : "");
+        request.put("channelTypeId", channelTypeId != 0 ? channelTypeId : "");
 
         HttpManager.getInstance().get(request, SERVICES_ADDRESS + API_CAN_CHANNEL_ALL, requestCode, listener);
     }
@@ -703,7 +715,7 @@ public class HttpRequest {
         Map<String, Object> request = new HashMap<>();
         request.put("name", "");
         request.put("pageNum", 1);
-        request.put("pageSize" , 1000);
+        request.put("pageSize", 1000);
         HttpManager.getInstance().get(request, SERVICES_ADDRESS + API_ELECTRICITY_NODE, requestCode, listener);
     }
 
@@ -713,30 +725,30 @@ public class HttpRequest {
     public static void pwdChangeHttp(String usedPasswrod, String password, int requestCode, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("usedPasswrod", MD5Util.computeMD5(usedPasswrod));
-        request.put("password",MD5Util.computeMD5(password));
+        request.put("password", MD5Util.computeMD5(password));
         HttpManager.getInstance().post(request, SERVICES_ADDRESS + API_USER_UPDATEPASSWORD, requestCode, listener);
     }
 
     /**
-     *修改个人信息
+     * 修改个人信息
      */
     public static void updateUserHttp(String id, String email, String gender, String name, String phone, int requestCode, OnHttpResponseListener listener) {
         Map<String, Object> request = new HashMap<>();
         request.put("id", id);
-        if(email != null && email.length() > 0){
-            request.put("email",email);
+        if (email != null && email.length() > 0) {
+            request.put("email", email);
         }
 
-        if(gender != null && gender.length() > 0){
-            request.put("gender",gender);
+        if (gender != null && gender.length() > 0) {
+            request.put("gender", gender);
         }
 
-        if(name != null && name.length() > 0){
-            request.put("name",name);
+        if (name != null && name.length() > 0) {
+            request.put("name", name);
         }
 
-        if(phone !=null && phone.length() > 0){
-            request.put("phone",phone);
+        if (phone != null && phone.length() > 0) {
+            request.put("phone", phone);
         }
 
         HttpManager.getInstance().post(request, SERVICES_ADDRESS + API_USER_UPDATE, requestCode, listener);
