@@ -74,7 +74,7 @@ class SwitchShowActivity : BaseActivity(), OnHttpResponseListener {
 
     private fun initHeader() {
         if (!StringUtil.isEmpty(firstShowingListShowUrl)) {
-            val headerVideoPath = HttpRequestLi.SHOW_VIDEO_SERVER_PATH + firstShowingListShowUrl
+            var headerVideoPath = HttpRequestLi.SHOW_VIDEO_SERVER_PATH + firstShowingListShowUrl
             var headerVideoTitle = firstShowingListShowUrl.split(".")[0]
             initHeaderVideo(headerVideoPath, headerVideoTitle)
         }
@@ -277,21 +277,47 @@ class SwitchShowActivity : BaseActivity(), OnHttpResponseListener {
                     }
                 }.show()
 
-                if (showXFrequestBackData.data.successNum > 0) {//更新正在播放的节目
+                if (showXFrequestBackData.data.successNum <= 0) {
+                    return
+                }
 
-                    //切换后重新查询当前正在播放的节目
-                    HttpRequestLi.getShowShowingListBySiteId(currentSiteDetail.site.id, GET_SHOWING_LIST2, this)
+                //更新正在播放的节目
+                //切换后重新查询当前正在播放的节目
+                HttpRequestLi.getShowShowingListBySiteId(currentSiteDetail.site.id, GET_SHOWING_LIST2, this)
+            }
+            GET_SHOWING_LIST2 -> {//切换后重新查询当前正在播放的节目结果
+                val showIngListData = JsonUtils.parseObject(resultJson, ShowIngListData::class.java)
+                CommonUtils.exitLogin(showIngListData.code, mActivity)
+                loadingDialog.dismiss()
+                if (showIngListData.code != 200) {
+                    binding.llNoVideoPlayIng.visibility = View.VISIBLE
+                    binding.llPlaying.visibility = View.GONE
 
+                }
+                if (null != showIngListData.nowPlayFileList && showIngListData.nowPlayFileList.size > 0) {
+                    repeat(showIngListData.nowPlayFileList.size) {
+                        if (!StringUtil.isEmpty(showIngListData.nowPlayFileList[it])) {
+                            firstShowingListShowUrl = showIngListData.nowPlayFileList[it]
+                            return@repeat
+                        }
+                    }
+                    if (StringUtil.isEmpty(firstShowingListShowUrl)) {
+                        binding.llNoVideoPlayIng.visibility = View.VISIBLE
+                        binding.llPlaying.visibility = View.GONE
+                    }
+                } else {//没有正在播放的节目
+                    binding.llNoVideoPlayIng.visibility = View.VISIBLE
+                    binding.llPlaying.visibility = View.GONE
+                }
+
+
+                if (!StringUtil.isEmpty(firstShowingListShowUrl)) {
+                    var headerVideoPath = HttpRequestLi.SHOW_VIDEO_SERVER_PATH + firstShowingListShowUrl
+                    var headerVideoTitle = firstShowingListShowUrl.split(".")[0]
+                    initHeaderVideo(headerVideoPath, headerVideoTitle)
                 }
 
             }
-            GET_SHOWING_LIST2 ->{//切换后重新查询当前正在播放的节目结果
-                // TODO: 2021/2/24 0024
-
-
-            }
-
-
 
 
         }

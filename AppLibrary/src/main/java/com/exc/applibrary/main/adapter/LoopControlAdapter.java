@@ -60,9 +60,14 @@ public class LoopControlAdapter extends RecyclerView.Adapter<LoopControlAdapter.
         holder.loop_name.setText("回路名称：" + dataBeanList.get(position).getName());
         holder.loop_node.setText("节点名称：" + dataBeanList.get(position).getNodeName());
         holder.loop_state.setText("实时状态：");
-        holder.loop_state_text.setText((value==1?"开启":"关闭"));
-        holder.loop_state_text.setTextColor(value==1?Color.RED:Color.WHITE);
-        holder.img_switch.setBackgroundResource(value==1?R.mipmap.new_switch_open:R.mipmap.new_switch_close);
+        holder.img_switch.setBackgroundResource(value==1?R.mipmap.newcontrol_switch_open:R.mipmap.newcontrol_switch_close);
+
+        if(dataBeanList.get(holder.getAdapterPosition()).getItem_select()){
+            holder.baseview_device.setBackgroundResource(R.drawable.background_control_selectbase);
+        }else {
+            holder.baseview_device.setBackgroundResource(R.drawable.background_control_base);
+        }
+
 
         holder.img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +85,11 @@ public class LoopControlAdapter extends RecyclerView.Adapter<LoopControlAdapter.
             @Override
             //item 点击事件
             public void onClick(View v) {
+                boolean itemselect = dataBeanList.get(holder.getAdapterPosition()).getItem_select();
+                dataBeanList.get(holder.getAdapterPosition()).setItem_select(!itemselect);
 
+                itemSelectClick(holder);
+                notifyDataSetChanged();
             }
         });
     }
@@ -101,6 +110,12 @@ public class LoopControlAdapter extends RecyclerView.Adapter<LoopControlAdapter.
 
         onItemClickListener.onItemSiteClick(dataBeanList.get(holder.getAdapterPosition()).getName(),holder.getAdapterPosition(),1);
     }
+
+    public void itemSelectClick(VH holder){
+
+        onItemClickListener.onItemSiteClick(dataBeanList.get(holder.getAdapterPosition()).getName(),holder.getAdapterPosition(),3);
+    }
+
     @Override
     public int getItemCount() {
         return dataBeanList.size();
@@ -111,9 +126,9 @@ public class LoopControlAdapter extends RecyclerView.Adapter<LoopControlAdapter.
         public TextView loop_name;
         public TextView loop_node;
         public TextView loop_state;
-        public TextView loop_state_text;
         public ImageView img_edit;
         public ImageView img_switch;
+        public View baseview_device;
 
         public VH(View v) {
             super(v);
@@ -122,7 +137,7 @@ public class LoopControlAdapter extends RecyclerView.Adapter<LoopControlAdapter.
             loop_name = v.findViewById(R.id.loop_name);
             loop_node = v.findViewById(R.id.loop_node);
             loop_state = v.findViewById(R.id.loop_state);
-            loop_state_text = v.findViewById(R.id.loop_state_text);
+            baseview_device = v.findViewById(R.id.baseview_device);
         }
     }
 

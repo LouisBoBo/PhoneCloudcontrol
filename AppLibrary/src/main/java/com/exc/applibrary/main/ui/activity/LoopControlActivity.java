@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,7 @@ import com.exc.applibrary.main.model.SelectBuildModel;
 import com.exc.applibrary.main.model.TypeRealyModel;
 import com.exc.applibrary.main.ui.dialog.LoopConrolDialog;
 import com.exc.applibrary.main.ui.dialog.SelectControlDialog;
+import com.exc.applibrary.main.ui.fragment.MapFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -39,11 +43,12 @@ import java.util.List;
 
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.interfaces.OnHttpResponseListener;
+import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.ui.BottomMenuWindow;
 import zuo.biao.library.util.JsonUtils;
 import zuo.biao.library.util.Log;
 
-public class LoopControlActivity extends BaseActivity implements OnHttpResponseListener, LoopConrolDialog.OnDialogConfirmClickListener,SelectControlDialog.onSelectControlListener {
+public class LoopControlActivity extends BaseActivity implements OnHttpResponseListener, LoopConrolDialog.OnDialogConfirmClickListener,SelectControlDialog.onSelectControlListener, AlertDialog.OnDialogButtonClickListener {
     private RecyclerView leftRecyclerView;
     private RecyclerView rightRecyclerView;
     private LoopDeviceAdapter deviceAdapter;
@@ -55,7 +60,8 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
 
 
     private YFHeaderView headerView;
-    private TextView text_title;
+    private TextView control_open;
+    private TextView control_close;
     private TextView btn_online;
     private TextView btn_offline;
     private TextView btn_open;
@@ -81,6 +87,8 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
     private final int CHANNELALL_REQUEST_CODE = 2;
     private final int CANCHANNEL_REQUEST_CODE = 3;
     private final int CHANNELCONTROL_REQUEST_CODE = 4;
+    private final int DIALOG_CONTROL_OPEN_CODE = 5;
+    private final int DIALOG_CONTROL_CLOSE_CODE = 6;
 
     private static final String[] TOPBAR_COLOR_NAMES = {"灰色", "蓝色", "黄色"};
 
@@ -125,7 +133,8 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
         btn_offline = findViewById(R.id.btn_offline);
         btn_open = findViewById(R.id.btn_open);
         btn_close = findViewById(R.id.btn_close);
-        text_title = findViewById(R.id.title_text);
+        control_open = findViewById(R.id.control_open);
+        control_close = findViewById(R.id.control_close);
 
         headerView.setImg_right(R.mipmap.icon_searchblue);
         headerView.img_right.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +157,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
         deviceAdapter.setOnItemClickListener(new LoopDeviceAdapter.OnItemClickListener() {
             @Override
             public void onItemSiteClick(String select_text, int id) {
-                text_title.setText(select_text);
+                setViewLayoutParams(control_open,1,1);
+                setViewLayoutParams(control_close,1,1);
+
                 channelTypeId = id;
                 pageNum = 1;
                 channelAllHttp();
@@ -165,6 +176,21 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
                     HttpRequest.channelControlHttp(select_listBean.getValue(),select_listBean.getId(),select_listBean.getDsn(),select_listBean.getTagId(),select_listBean.getNid(),select_listBean.getName(),CHANNELCONTROL_REQUEST_CODE,LoopControlActivity.this::onHttpResponse);
                 }else if(type ==2){
                     showBottomDialog();
+                }else if(type == 3){
+                    Boolean select_item = false;
+                    for (ChannelAllModel.DataBean.ListBean listBean : dataBeanList) {
+                        if(listBean.getItem_select()){
+                            select_item = listBean.getItem_select();
+                            break;
+                        }
+                    }
+                    if(select_item){
+                        setViewLayoutParams(control_open,70,160);
+                        setViewLayoutParams(control_close,70,160);
+                    }else {
+                        setViewLayoutParams(control_open,1,1);
+                        setViewLayoutParams(control_close,1,1);
+                    }
                 }
             }
         });
@@ -174,6 +200,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                setViewLayoutParams(control_open,1,1);
+                setViewLayoutParams(control_close,1,1);
+
                 btn_online.setSelected(true);
                 btn_offline.setSelected(false);
 
@@ -190,6 +219,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                setViewLayoutParams(control_open,1,1);
+                setViewLayoutParams(control_close,1,1);
+
                 btn_online.setSelected(false);
                 btn_offline.setSelected(true);
 
@@ -205,6 +237,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
         btn_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setViewLayoutParams(control_open,1,1);
+                setViewLayoutParams(control_close,1,1);
+
                 btn_open.setSelected(true);
                 btn_close.setSelected(false);
 
@@ -220,6 +255,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setViewLayoutParams(control_open,1,1);
+                setViewLayoutParams(control_close,1,1);
+
                 btn_open.setSelected(false);
                 btn_close.setSelected(true);
 
@@ -229,6 +267,22 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
                 status = 0;
                 pageNum = 1;
                 channelAllHttp();
+            }
+        });
+
+        control_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = new AlertDialog(context, "", "此操作将打开当前选中的所有回路，是否仍然执行？", true, DIALOG_CONTROL_OPEN_CODE,LoopControlActivity.this::onDialogButtonClick);
+                dialog.show();
+            }
+        });
+
+        control_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = new AlertDialog(context, "", "此操作将关闭当前选中的所有回路，是否仍然执行？", true, DIALOG_CONTROL_CLOSE_CODE,LoopControlActivity.this::onDialogButtonClick);
+                dialog.show();
             }
         });
     }
@@ -320,6 +374,9 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
                     if(pageNum==1){
                         dataBeanList.clear();
                         rightRecyclerView.setAdapter(controlAdapter);
+                    }
+                    for (ChannelAllModel.DataBean.ListBean listBean : channelAllModel.getData().getList()) {
+                        listBean.setItem_select(false);
                     }
                     dataBeanList.addAll(channelAllModel.getData().getList());
                     controlAdapter.setmDatas(dataBeanList);
@@ -418,5 +475,31 @@ public class LoopControlActivity extends BaseActivity implements OnHttpResponseL
         selectControlDialog.dismiss();
         loopConrolDialog.refreshUI(name);
         select_listBean.setCanChannelTypeId(id);
+    }
+
+    //重设view高宽
+    public void setViewLayoutParams(View view,int height,int width){
+        ConstraintLayout.LayoutParams linearParams =(ConstraintLayout.LayoutParams) view.getLayoutParams(); //取控件textView当前的布局参数
+        linearParams.width = width;// 控件的宽强制设成30
+        linearParams.height = height;// 控件的高强制设成20
+        view.setLayoutParams(linearParams);
+    }
+
+    //弹框
+    public void onDialogButtonClick(int requestCode, boolean isPositive) {
+        if (! isPositive) {
+            return;
+        }
+
+        switch (requestCode) {
+            case DIALOG_CONTROL_OPEN_CODE:
+
+                break;
+
+            case DIALOG_CONTROL_CLOSE_CODE:
+
+                break;
+            default:
+        }
     }
 }

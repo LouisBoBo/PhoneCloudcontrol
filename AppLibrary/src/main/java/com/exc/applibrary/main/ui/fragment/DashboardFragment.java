@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import com.exc.applibrary.R;
 import com.exc.applibrary.main.customview.YFHeaderView;
 import com.exc.applibrary.main.message.MyMessageListActivity;
+import com.exc.applibrary.main.monitoring.MonitoringListActivity;
 import com.exc.applibrary.main.ui.activity.DataCenterActivity;
 import com.exc.applibrary.main.ui.activity.LoopControlActivity;
 import com.exc.applibrary.main.ui.activity.MyWorkOrderListActivity;
-import com.exc.applibrary.main.ui.activity.PartitionListActivity;
 import com.exc.applibrary.main.ui.activity.SceneSwitchActivity;
 import com.exc.applibrary.main.show.SwitchShowActivity;
 
@@ -81,7 +81,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
             toActivity(new Intent(mActivity, DataCenterActivity.class));
 //            showShortToast("敬请期待~");
         } else if (id == R.id.bordy6) {//智能监控
-            showShortToast("敬请期待~");
+            toActivity(new Intent(mActivity, MonitoringListActivity.class));
 
         }
     }

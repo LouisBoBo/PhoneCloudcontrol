@@ -278,6 +278,7 @@ public class ChannelAllModel {
             private int tagId;
             private int value;
             private Boolean isselect;
+            private Boolean item_select;
 
             public Boolean getIsselect() {
                 return isselect;
@@ -285,6 +286,14 @@ public class ChannelAllModel {
 
             public void setIsselect(Boolean isselect) {
                 this.isselect = isselect;
+            }
+
+            public Boolean getItem_select() {
+                return item_select;
+            }
+
+            public void setItem_select(Boolean item_select) {
+                this.item_select = item_select;
             }
 
             public String getBuildingName() {
