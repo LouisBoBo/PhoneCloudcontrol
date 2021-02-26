@@ -25,4 +25,14 @@
     <declare-styleable name="SwitchButton">
         <attr name="switch_state" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ShowListVideoPlayer">
+        <attr name="showSwitchBTN" format="boolean"/>
+    </declare-styleable>
+
+
+
+
+
+
 </resources>

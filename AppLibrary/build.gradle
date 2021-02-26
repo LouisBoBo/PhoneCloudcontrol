@@ -104,6 +104,5 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 //    implementation 'com.xm.permissions:XmPermissions:1.0.2'
     implementation 'com.lxj:xpopup:+'
-
-
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }

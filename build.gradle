@@ -5,11 +5,12 @@ buildscript {
     //创建变量存储当前Kotlin版本，方便几个不同地方用到该版本号
     ext.kotlin_version = '1.4.21'
     //创建变量存储Anko库版本号，Anko是一个用来简化一些Android任务的很强大的Kotlin库
-    ext.anko_version='0.10.7'
+    ext.anko_version = '0.10.7'
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
         google()
         jcenter()
-        maven {url"https://jitpack.io"}
+        maven { url "https://jitpack.io" }
 
     }
     dependencies {

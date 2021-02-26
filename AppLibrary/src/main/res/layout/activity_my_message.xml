@@ -94,7 +94,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.peng.pswitch.PSwitchView
-            android:id="@+id/view_switch1"
+            android:id="@+id/viewSwitch1"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_20"
             app:layout_constraintBottom_toBottomOf="parent"

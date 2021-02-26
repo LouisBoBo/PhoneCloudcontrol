@@ -74,6 +74,7 @@ class SceneSwitchLeftFragment : BaseFragment() {
 
     private fun initListData() {
         HttpRequest.getGetSceneLeftList(partitionId, siteId, pageNum, 1) { _: Int, resultJson: String?, _: Exception? ->
+            loadingDialog.dismiss()
             if (StringUtil.isEmpty(resultJson)) {
                 showShortToast("数据异常")
                 return@getGetSceneLeftList
@@ -83,7 +84,6 @@ class SceneSwitchLeftFragment : BaseFragment() {
             if (null != sceneLeftListBean.data.list && sceneLeftListBean.data.list.size > 0) {
                 if (pageNum == 1) {
                     mAdapter.setList(sceneLeftListBean.data.list)
-                    loadingDialog.dismiss()
                 } else {
                     mAdapter.addData(sceneLeftListBean.data.list)
                 }

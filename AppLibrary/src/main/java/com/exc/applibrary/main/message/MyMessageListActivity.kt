@@ -6,17 +6,20 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exc.applibrary.databinding.ActivityMyMessageBinding
+import com.exc.applibrary.main.HttpListener
 import com.exc.applibrary.main.HttpRequestLi
 import com.exc.applibrary.main.customview.CustomDialog
 import com.exc.applibrary.main.model.BaseBean
+import com.exc.applibrary.main.model.BaseBean2
 import com.exc.applibrary.main.utils.CommonUtils
 import com.exc.applibrary.main.utils.ToastUtils
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import zuo.biao.library.base.BaseActivity
+import zuo.biao.library.ui.AlertDialog
 import zuo.biao.library.util.JsonUtils
-import zuo.biao.library.util.Log
 import zuo.biao.library.util.StringUtil
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.N)
 class MyMessageListActivity : BaseActivity() {
@@ -26,6 +29,7 @@ class MyMessageListActivity : BaseActivity() {
     private lateinit var loadingDialog: CustomDialog
     var listData = arrayListOf<MessageListBean.DataBeanX.DataBean>()
     var fistInitListEnd = false
+    var messageSwitchStatus = 0
 
 
     /**
@@ -84,18 +88,26 @@ class MyMessageListActivity : BaseActivity() {
 
     private fun initListData() {
         HttpRequestLi.getMessageList(pageNum, 1) { _: Int, resultJson: String?, _: Exception? ->
+            loadingDialog.dismiss()
             if (StringUtil.isEmpty(resultJson)) {
                 showShortToast("数据异常")
                 return@getMessageList
             }
             val messageListBean = JsonUtils.parseObject(resultJson, MessageListBean::class.java)
             CommonUtils.exitLogin(messageListBean.code, activity)
+            if (null != messageListBean.data) {
+                binding.viewSwitch1.isChecked = messageListBean.data.state != 1
+                if (pageNum == 1) {
+                    messageSwitchStatus = messageListBean.data.state
+                }
+            }
+
+
             if (null != messageListBean.data.data && messageListBean.data.data.size > 0) {
                 if (pageNum == 1) {
                     fistInitListEnd = true
                     listData = messageListBean.data.data
                     mAdapter.setList(messageListBean.data.data)
-                    loadingDialog.dismiss()
                 } else {
                     listData.addAll(messageListBean.data.data)
                     mAdapter.addData(messageListBean.data.data)
@@ -153,6 +165,50 @@ class MyMessageListActivity : BaseActivity() {
 
 
         }
+
+        binding.viewSwitch1.setOnSwitchCheckListener {
+            if(messageSwitchStatus == 0){//在开启的状态下再开启就不用任何操作
+                if(it){
+                    return@setOnSwitchCheckListener
+                }
+            }
+            if(messageSwitchStatus == 1){//在关闭的状态下再关闭就不用任何操作
+                if(!it){
+                    return@setOnSwitchCheckListener
+                }
+            }
+            var strPositive = "关闭"
+            var message = "您即将关闭消息通知。关闭后，将清除历史消息；同时您将不会在此接收到故障提醒信息！"
+
+            if (it) {//当前是关闭
+                strPositive = "打开"
+                message = "您即将打开消息通知。打开后，您将会在此接收并查看故障提醒信息！"
+
+            }
+            AlertDialog(this, "提示", message, true, strPositive, 0, AlertDialog.OnDialogButtonClickListener { requestCode: Int, isPositive: Boolean ->
+                if (!isPositive) {
+                    binding.viewSwitch1.isChecked = !it
+                    return@OnDialogButtonClickListener
+                }
+                //点击了确定
+                var news = if (it) 0 else 1
+                HttpRequestLi.switchMessage(this, news, object : HttpListener<BaseBean2>() {
+                    override fun onSuccess(result: BaseBean2?) {
+                        binding.viewSwitch1.isChecked = result!!.data != 1
+                        messageSwitchStatus = result!!.data
+                        if(messageSwitchStatus == 1){//关闭后重新查询
+                            pageNum == 1
+                            initListData()
+                        }
+
+                    }
+                    override fun onError() {
+                    }
+                })
+            }).show()
+
+        }
+
     }
 
 

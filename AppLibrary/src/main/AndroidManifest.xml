@@ -32,9 +32,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".main.ui.activity.AboutUsActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.ui.activity.DataCenterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.ui.activity.PartitionListActivity"
+            android:screenOrientation="portrait" />
 
-            />
         <activity
             android:name=".main.ui.activity.WorkOrderDetailActivity"
             android:screenOrientation="portrait" />

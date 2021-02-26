@@ -67,6 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_50"
         android:layout_marginRight="@dimen/dp_20"
+        android:textSize="14sp"
         android:background="@null"
         android:singleLine="true"
         app:layout_constraintTop_toTopOf="@id/tv_oldpwd"
@@ -96,6 +97,7 @@
         android:layout_marginRight="@dimen/dp_20"
         android:background="@null"
         android:singleLine="true"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@id/tv_newpwd"
         app:layout_constraintStart_toEndOf="@id/tv_newpwd_title"
         app:layout_constraintEnd_toEndOf="@id/tv_newpwd"/>
@@ -124,6 +126,7 @@
         android:layout_marginRight="@dimen/dp_20"
         android:background="@null"
         android:singleLine="true"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="@id/tv_cfmpwd"
         app:layout_constraintStart_toEndOf="@id/tv_cfmpwd_title"
         app:layout_constraintEnd_toEndOf="@id/tv_cfmpwd"/>

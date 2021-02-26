@@ -3,6 +3,8 @@ package com.exc.applibrary.main.model;
 import java.io.Serializable;
 import java.util.List;
 
+import zuo.biao.library.util.StringUtil;
+
 public class ShowListData implements Serializable {
     /**
      * code : 200
@@ -185,6 +187,21 @@ public class ShowListData implements Serializable {
             private int siteId;
             private int srcvId;
             private String vidId;
+            private String type;
+
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
+
+
+
+
+
             private String vidName;
 
             public String getDuration() {

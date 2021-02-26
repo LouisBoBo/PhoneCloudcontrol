@@ -1,5 +1,8 @@
 package com.exc.applibrary.main
 
+import android.app.Activity
+import com.exc.applibrary.main.model.BaseBean
+import com.exc.applibrary.main.model.BaseBean2
 import zuo.biao.library.interfaces.OnHttpResponseListener
 import java.util.*
 
@@ -9,11 +12,10 @@ HttpRequestLi {
 
         //---------------端口-----------
         //	private static final String TAG = "HttpRequest";
-        private val SHOW_PORT: String? = ":60013" //节目端口
+        private val SHOW_PORT: String? = ":62126" //节目端口
 //        private val SHOW_PORT: String? = "http://framesync.whapp.test.exc-led.cn" //节目端口
 
-        val SHOW_VIDEO_SERVER_PATH = "http://192.168.111.129:60012//originalV/"
-
+        val SHOW_VIDEO_SERVER_PATH = "http://192.168.111.129:60012/originalV/"
 
 
         //----------------------apiURL--------------------------------------------
@@ -26,6 +28,10 @@ HttpRequestLi {
          */
         private val MESSAGE_LIST = "${HttpRequest.SERVICES_PORT}/api/notice/list"
 
+        /**
+         * 故障消息开关
+         */
+        private val MESSAGE_SWITCH = "${HttpRequest.SERVICES_PORT}/api/notice/messageStatus"
 
         /**
          * 修改故障消息状态
@@ -42,7 +48,7 @@ HttpRequestLi {
         }
 
 
-        fun getShowShowListBySiteId(pageNum:Int,siteId: Int, requestCode: Int, listener: OnHttpResponseListener?) {
+        fun getShowShowListBySiteId(pageNum: Int, siteId: Int, requestCode: Int, listener: OnHttpResponseListener?) {
             val request: MutableMap<String, Any> = HashMap()
             request["id"] = siteId
             request["pageNum"] = pageNum
@@ -50,7 +56,7 @@ HttpRequestLi {
             HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + GET_SHOW_SHOW_LIST_BY_SITE_ID, requestCode, listener)
         }
 
-        fun getMessageList(pageNum:Int,requestCode: Int, listener: OnHttpResponseListener?) {
+        fun getMessageList(pageNum: Int, requestCode: Int, listener: OnHttpResponseListener?) {
             val request: MutableMap<String, Any> = HashMap()
             request["status"] = 0
             request["pageNum"] = pageNum
@@ -58,13 +64,20 @@ HttpRequestLi {
             HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + MESSAGE_LIST, requestCode, listener)
         }
 
-        fun modifyMessageStatus(id:Int,requestCode: Int, listener: OnHttpResponseListener?) {
+        fun switchMessage(activity: Activity, news: Int, httpListener: HttpListener<BaseBean2>?) {
+            val request: MutableMap<String, Any> = HashMap()
+            request["news"] = news
+            HttpManager.getInstance().postBackModule(activity, request, HttpRequest.SERVICES_ADDRESS + MESSAGE_SWITCH, httpListener)
+        }
+
+
+        fun modifyMessageStatus(id: Int, requestCode: Int, listener: OnHttpResponseListener?) {
             val request: MutableMap<String, Any> = HashMap()
             request["status"] = 1
-            if(id > 0){
+            if (id > 0) {
                 request["id"] = id
             }
-           HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + UPDATE_MESSAGE, requestCode, listener)
+            HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + UPDATE_MESSAGE, requestCode, listener)
         }
     }
 }

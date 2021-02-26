@@ -1,6 +1,7 @@
 package com.exc.applibrary.main.show;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +24,16 @@ public class ShowListVideoPlayer extends StandardGSYVideoPlayer {
 
     public ShowListVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initAttrValues(context,attrs);
+    }
+
+    private void initAttrValues(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShowListVideoPlayer);
+        boolean isShowSwitchBTN = typedArray.getBoolean(R.styleable.ShowListVideoPlayer_showSwitchBTN,true);
+
+        if(!isShowSwitchBTN){
+            iv_switch.setVisibility(GONE);
+        }
     }
 
     public TextView show_title;
@@ -34,6 +45,10 @@ public class ShowListVideoPlayer extends StandardGSYVideoPlayer {
 
         show_title = findViewById(R.id.show_title);
         iv_switch = findViewById(R.id.iv_switch);
+
+
+
+
 
 
     }

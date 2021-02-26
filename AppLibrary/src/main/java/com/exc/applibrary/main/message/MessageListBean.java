@@ -46,6 +46,17 @@ public class MessageListBean implements Serializable {
          */
 
         private int count;
+
+        public int getState() {
+            return state;
+        }
+
+        public void setState(int state) {
+            this.state = state;
+        }
+
+        private int state;//消息接收通知开关，0开启通知  1关闭通知
+
         private ArrayList<DataBean> data;
 
         public int getCount() {

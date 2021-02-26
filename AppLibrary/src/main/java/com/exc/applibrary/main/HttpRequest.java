@@ -570,6 +570,22 @@ public class HttpRequest {
         HttpManager.getInstance().post(request, SERVICES_ADDRESS + IOT_API_FILES_TS3_SCRIPTS_FAST, requestCode, listener);
     }
 
+
+    /**
+     * 节目切换-站点节目切换
+     */
+    public static void ts3ScriptsFastHttp2(String content, String filename, String partitionId, String siteId, String[] sns, int requestCode, OnHttpResponseListener listener) {
+        Map<String, Object> request = new HashMap<>();
+        request.put("content", content);
+        request.put("filename", filename);
+        request.put("partitionId", partitionId);
+        request.put("siteId", siteId);
+        request.put("sns", sns);
+
+        HttpManager.getInstance().post(request, SERVICES_ADDRESS + IOT_API_FILES_TS3_SCRIPTS_FAST, requestCode, listener);
+    }
+
+
     /**
      * 根据建筑物id/name查建筑物详情
      */

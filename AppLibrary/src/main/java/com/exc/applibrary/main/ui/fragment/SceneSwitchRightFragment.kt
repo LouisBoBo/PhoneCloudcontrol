@@ -68,6 +68,7 @@ class SceneSwitchRightFragment : BaseFragment() {
 
     private fun initListData() {
         HttpRequest.getGetSceneRightList(pageNum, 1) { _: Int, resultJson: String?, _: Exception? ->
+            loadingDialog.dismiss()
             if (StringUtil.isEmpty(resultJson)) {
                 showShortToast("数据异常")
                 return@getGetSceneRightList
@@ -77,7 +78,6 @@ class SceneSwitchRightFragment : BaseFragment() {
             if (null != sceneChooseNodeListData.data.list && sceneChooseNodeListData.data.list.size > 0) {
                 if (pageNum == 1) {
                     mAdapter.setList(sceneChooseNodeListData.data.list)
-                    loadingDialog.dismiss()
                 } else {
                     mAdapter.addData(sceneChooseNodeListData.data.list)
                 }

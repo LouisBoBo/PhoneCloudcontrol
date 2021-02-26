@@ -4,6 +4,11 @@ public class BaseBean {
     //{"code":200,"message":"SUCCESS!"}
     private int code;
     private String message;
+
+
+
+
+
     public int getCode() {
         return code;
     }
