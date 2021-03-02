@@ -106,4 +106,5 @@
     <dimen name="dp_250">250dp</dimen>
     <dimen name="dp_270">270dp</dimen>
     <dimen name="dp_500">500dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

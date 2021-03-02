@@ -50,27 +50,28 @@ public class HttpRequest {
     /**
      * 端口
      */
-    public static final String SERVICES_PORT = ":9701";//吴自力
-    public static final String SERVICES_PORT1 = ":8080";
-    public static final String SERVICES_PORT2 = ":8088";
-    public static final String SERVICES_PORT3 = ":8083";
-    public static final String SERVICES_PORT_ORDER = ":8085";
+//    public static final String SERVICES_PORT = ":9701";//吴自力
+//    public static final String SERVICES_PORT1 = ":8080";
+//    public static final String SERVICES_PORT2 = ":8088";
+//    public static final String SERVICES_PORT3 = ":8083";
+//    public static final String SERVICES_PORT_ORDER = ":8085";
 //    public static final String SERVICES_PORT_ORDER = ":8089";//武汉洪山
 
     /**
      * 基础URL，这里服务器设置可切换
      */
-    public static final String SERVICES_ADDRESS = "http://192.168.112.78";//吴自力
-    public static final String SERVICES_FILE_PATH = "http://192.168.112.78" + SERVICES_PORT_ORDER + "/";
+//    public static final String SERVICES_ADDRESS = "http://192.168.112.78";//吴自力
+//    public static final String SERVICES_FILE_PATH = "http://192.168.112.78" + SERVICES_PORT_ORDER + "/";
 
 
-//    public static final String SERVICES_PORT = "http://iot.whapp.test.exc-led.cn";
-//    public static final String SERVICES_PORT1 = "http://iotwar.whapp.test.exc-led.cn";
-//    public static final String SERVICES_PORT2 = ":8088";
-//    public static final String SERVICES_PORT3 = "http://iotwar.whapp.test.exc-led.cn";
-//    public static final String SERVICES_PORT_ORDER = "http://manage.whapp.test.exc-led.cn";
-//    public static final String SERVICES_ADDRESS = "";
-//    public static final String SERVICES_FILE_PATH = "" + SERVICES_PORT_ORDER + "/";
+    public static final String SERVICES_PORT = "http://iot.whapp.test.exc-led.cn";
+    public static final String SERVICES_PORT1 = "http://iotwar.whapp.test.exc-led.cn";
+    public static final String SERVICES_PORT2 = ":8088";
+    public static final String SERVICES_PORT3 = "http://iotwar.whapp.test.exc-led.cn";
+    public static final String SERVICES_PORT_ORDER = "http://manage.whapp.test.exc-led.cn";
+    public static final String SERVICES_PORT_MONITOR = "http://surveillance.whapp.test.exc-led.cn";
+    public static final String SERVICES_ADDRESS = "";
+    public static final String SERVICES_FILE_PATH = "" + SERVICES_PORT_ORDER + "/";
 
 
     /**

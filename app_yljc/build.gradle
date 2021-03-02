@@ -3,6 +3,11 @@ plugins {
 }
 apply plugin: 'kotlin-android'
 
+static def buildTime() {
+    return new Date().format("yyyyMMdd")
+}
+
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -50,7 +55,7 @@ android {
             variant.outputs.all {
                 //在这里修改apk文件名
 //                outputFileName = "${variant.name}-v${variant.versionName}.apk"
-                outputFileName = "BuildingLighting-v${variant.versionName}.apk"
+                outputFileName = "WuHan-v${variant.versionName}_${buildTime()}.apk"
             }
 
     }

@@ -1,7 +1,6 @@
 package com.exc.applibrary.main
 
 import android.app.Activity
-import com.exc.applibrary.main.model.BaseBean
 import com.exc.applibrary.main.model.BaseBean2
 import zuo.biao.library.interfaces.OnHttpResponseListener
 import java.util.*
@@ -12,8 +11,8 @@ HttpRequestLi {
 
         //---------------端口-----------
         //	private static final String TAG = "HttpRequest";
-        private val SHOW_PORT: String? = ":62126" //节目端口
-//        private val SHOW_PORT: String? = "http://framesync.whapp.test.exc-led.cn" //节目端口
+//        private val SHOW_PORT: String? = ":62126" //节目端口
+        private val SHOW_PORT: String? = "http://framesync.whapp.test.exc-led.cn" //节目端口
 
         val SHOW_VIDEO_SERVER_PATH = "http://192.168.111.129:60012/originalV/"
 
@@ -37,6 +36,11 @@ HttpRequestLi {
          * 修改故障消息状态
          */
         private val UPDATE_MESSAGE = "${HttpRequest.SERVICES_PORT}/api/notice/update"
+
+
+        private val MONITORING_LIST = "${HttpRequest.SERVICES_PORT_MONITOR}/surveillance/cameraInfo/page"
+
+        private val CURRENT_MONITOR_URL = "${HttpRequest.SERVICES_PORT_MONITOR}/surveillance/cameraInfo/previewURLs"
 
 
         //-------------------------------------method------------------------
@@ -78,6 +82,21 @@ HttpRequestLi {
                 request["id"] = id
             }
             HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + UPDATE_MESSAGE, requestCode, listener)
+        }
+
+
+        fun getMonitoringList(pageNo: Int, requestCode: Int, listener: OnHttpResponseListener?) {
+            val request: MutableMap<String, Any> = HashMap()
+            request["pageNo"] = pageNo
+            request["pageSize"] = 1000
+
+            HttpManager.getInstance().get(request, HttpRequest.SERVICES_ADDRESS + MONITORING_LIST, requestCode, listener)
+        }
+
+        fun getCurrentMonitor(cameraIndexCode: String, requestCode: Int, listener: OnHttpResponseListener?) {
+            val request: MutableMap<String, Any> = HashMap()
+            request["cameraIndexCode"] = cameraIndexCode
+            HttpManager.getInstance().post(request, HttpRequest.SERVICES_ADDRESS + CURRENT_MONITOR_URL, requestCode, listener)
         }
     }
 }

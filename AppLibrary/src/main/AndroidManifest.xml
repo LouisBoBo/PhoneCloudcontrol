@@ -83,11 +83,11 @@
             android:name=".main.show.SwitchShowActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".main.monitoring.MonitoringListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:screenOrientation="portrait" />
-
 
     </application>
 
