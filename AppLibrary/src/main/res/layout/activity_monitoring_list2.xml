@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.hikvision.open.app.PreviewActivity">
+
+        <com.exc.applibrary.main.monitoring.PlayWindowContainer
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black">
+
+            <TextureView
+                android:id="@+id/texture_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/result_hint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/digital_scale_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="1.0X"
+                android:textSize="16sp"
+                android:layout_marginRight="@dimen/fab_margin" />
+
+            <com.exc.applibrary.main.monitoring.AutoHideView
+                android:id="@+id/auto_hide_view"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:visibility="gone"/>
+        </com.exc.applibrary.main.monitoring.PlayWindowContainer>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlDisableContentWhenRefresh="true"
+        app:srlEnableRefresh="false">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerViewShowList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"
+            tools:listitem="@layout/item_monitor_list" />
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>
+
